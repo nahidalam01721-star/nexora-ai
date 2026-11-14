@@ -1,25 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090b12"><title>Nexora AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b12">
+<title>Nexora AI</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#090b12;color:#edf0fa;font:15px Arial,sans-serif}.app{display:flex;height:100vh;min-height:580px}.side{width:255px;background:#0c0f18;border-right:1px solid #242a3b;padding:22px 15px;display:flex;flex-direction:column}.brand{font-size:22px;font-weight:bold;margin:5px 8px 28px}.brand span{color:#a99bff}.new,.nav button,.history button{width:100%;text-align:left;border:0;border-radius:10px;padding:12px;background:transparent;color:#aeb6c9;cursor:pointer}.new{background:#211e38;border:1px solid #393354;color:white;margin-bottom:25px}.label{font-size:10px;letter-spacing:1.5px;color:#758099;margin:12px 8px}.nav button:hover,.history button:hover{background:#1b2030;color:white}.history{margin-top:18px}.profile{margin-top:auto;border-top:1px solid #242a3b;padding:18px 6px;color:#9ba5b9;font-size:12px}.main{flex:1;display:flex;flex-direction:column;min-width:0;background:radial-gradient(ellipse at 50% 15%,#19172c,#090b12 65%)}header{height:65px;border-bottom:1px solid #ffffff0d;display:flex;align-items:center;justify-content:space-between;padding:0 25px;color:#e8e9f4}.model{background:#171b29;color:white;border:1px solid #30364b;border-radius:9px;padding:9px 12px}.tag{font-size:11px;color:#9da8bd;border:1px solid #30364b;padding:7px 10px;border-radius:20px}.content{flex:1;overflow:auto;display:flex;justify-content:center;padding:25px}.welcome{margin:auto;text-align:center;max-width:700px}.orb{margin:0 auto 22px;width:65px;height:65px;border-radius:20px;background:linear-gradient(140deg,#38305e,#171b2b);display:grid;place-items:center;color:#c6bbff;font-size:30px}.eyebrow{color:#aa9dff;letter-spacing:2px;font-size:10px;font-weight:bold}.welcome h1{font-size:clamp(34px,5vw,52px);letter-spacing:-2px;margin:13px 0}.welcome p{color:#929bb0;font-size:14px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px auto;max-width:570px}.card{padding:15px;text-align:left;border:1px solid #292f43;border-radius:12px;background:#141827;color:#e8eafa;cursor:pointer}.card small{display:block;color:#8993aa;margin-top:6px}.messages{width:min(720px,100%);margin:0 auto;display:flex;flex-direction:column;gap:18px}.msg{padding:12px 15px;border-radius:13px;background:#171c2a;max-width:85%;white-space:pre-wrap;line-height:1.6}.msg.user{align-self:flex-end;background:#24213b}.msg.bot{align-self:flex-start}.composer-wrap{width:min(760px,calc(100% - 35px));margin:0 auto;padding:10px 0 18px}.composer{border:1px solid #343a50;background:#151a28;border-radius:16px;padding:12px}.composer textarea{width:100%;resize:none;max-height:130px;background:none;border:0;outline:0;color:white;font:15px Arial;padding:5px}.bottom{display:flex;justify-content:space-between;align-items:center;color:#808ba2;font-size:11px}.send{border:0;border-radius:10px;background:#a99bff;color:#151326;width:35px;height:35px;font-size:22px;cursor:pointer}.note{text-align:center;color:#67728a;font-size:10px;margin-top:9px}.hidden{display:none!important}.mobile{display:none}
-@media(max-width:700px){.side{display:none}.mobile{display:block}header{padding:0 13px}.content{padding:18px 12px}.welcome h1{font-size:37px}.cards{gap:7px}.card{padding:12px;font-size:12px}.card small{font-size:10px}.composer-wrap{width:calc(100% - 20px)}}
-</style></head>
-<body><div class="app">
-<aside class="side"><div class="brand">✦ Nexora <span>AI</span></div><button class="new" onclick="newChat()">＋ New chat</button><div class="label">WORKSPACE</div><nav class="nav"><button>◈ Chat</button><button onclick="notice('Explore AI is coming soon.')">⌘ Explore AI</button><button onclick="notice('Saved prompts are coming soon.')">▣ Saved prompts</button></nav><div class="label history">RECENT CHATS</div><div id="history"></div><div class="profile">● Guest User<br><br>Free preview workspace</div></aside>
-<main class="main"><header><div><button class="model" onclick="notice('More AI models will be added after provider setup.')">Nexora Assistant　⌄</button></div><span class="tag">● Preview</span></header>
-<section class="content"><div class="welcome" id="welcome"><div class="orb">✦</div><div class="eyebrow">YOUR AI, YOUR WORLD</div><h1>What can I help you with?</h1><p>Explore ideas, learn something new, or create something amazing.</p><div class="cards"><button class="card" onclick="suggest('Explain a difficult topic in simple Bangla.')">✧ Learn something<small>Explain a topic simply</small></button><button class="card" onclick="suggest('Help me brainstorm a creative project.')">⌁ Get creative<small>Brainstorm fresh ideas</small></button><button class="card" onclick="suggest('Help me write a professional email.')">✎ Write anything<small>Draft, improve, rewrite</small></button><button class="card" onclick="suggest('Help me understand this code step by step.')">⌘ Build with code<small>Understand and create code</small></button></div></div><div class="messages hidden" id="messages"></div></section>
-<div class="composer-wrap"><form class="composer" id="form"><textarea id="input" rows="2" placeholder="Message Nexora..."></textarea><div class="bottom"><span>✦ AI assistant</span><button class="send" type="submit">↑</button></div></form><div class="note">Nexora AI Preview · Live AI answers will be enabled after secure AI setup.</div></div></main></div>
+*{box-sizing:border-box}body{margin:0;background:#090b12;color:#edf0fa;font:15px Arial,sans-serif}
+button,textarea,select{font:inherit}.app{display:flex;height:100dvh;min-height:560px}
+.side{width:250px;flex-shrink:0;background:#0c0f18;border-right:1px solid #242a3b;padding:20px 14px;display:flex;flex-direction:column}
+.brand{font-size:22px;font-weight:bold;margin:5px 8px 26px}.brand span{color:#a99bff}
+.new{background:#211e38;border:1px solid #393354;color:white;border-radius:10px;padding:12px;text-align:left;cursor:pointer}
+.label{font-size:10px;letter-spacing:1.5px;color:#758099;margin:22px 8px 10px}
+.history button{width:100%;text-align:left;border:0;border-radius:9px;padding:10px;background:transparent;color:#aeb6c9;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history button:hover{background:#1b2030;color:white}.profile{margin-top:auto;border-top:1px solid #242a3b;padding:16px 6px;color:#9ba5b9;font-size:12px}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;background:radial-gradient(ellipse at 50% 15%,#19172c,#090b12 65%)}
+header{min-height:65px;border-bottom:1px solid #ffffff0d;display:flex;align-items:center;justify-content:space-between;padding:10px 22px;gap:10px}
+.model{background:#171b29;color:white;border:1px solid #30364b;border-radius:9px;padding:9px 12px}
+.status{font-size:11px;color:#b7c2d8;border:1px solid #30364b;padding:8px 10px;border-radius:20px}
+.content{flex:1;overflow:auto;display:flex;justify-content:center;padding:24px}
+.welcome{margin:auto;text-align:center;max-width:700px}.orb{margin:0 auto 20px;width:65px;height:65px;border-radius:20px;background:linear-gradient(140deg,#38305e,#171b2b);display:grid;place-items:center;color:#c6bbff;font-size:30px}
+.eyebrow{color:#aa9dff;letter-spacing:2px;font-size:10px;font-weight:bold}.welcome h1{font-size:clamp(32px,5vw,50px);letter-spacing:-2px;margin:13px 0}.welcome p{color:#929bb0;font-size:14px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:27px auto;max-width:570px}
+.card{padding:15px;text-align:left;border:1px solid #292f43;border-radius:12px;background:#141827;color:#e8eafa;cursor:pointer}.card small{display:block;color:#8993aa;margin-top:6px}
+.messages{width:min(780px,100%);margin:0 auto;display:flex;flex-direction:column;gap:15px}
+.msg{padding:12px 15px;border-radius:13px;background:#171c2a;max-width:92%;white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere}.msg.user{align-self:flex-end;background:#24213b}.msg.bot{align-self:flex-start}.msg.error{border:1px solid #74404a;color:#ffd5dc}
+.composer-wrap{width:min(780px,calc(100% - 32px));margin:0 auto;padding:10px 0 12px}
+.composer{border:1px solid #343a50;background:#151a28;border-radius:16px;padding:12px}
+.composer textarea{width:100%;resize:vertical;min-height:48px;max-height:140px;background:none;border:0;outline:0;color:white;font:15px Arial;padding:5px}
+.bottom{display:flex;justify-content:space-between;align-items:center;color:#808ba2;font-size:11px;gap:8px}.send{border:0;border-radius:10px;background:#a99bff;color:#151326;width:38px;height:36px;font-size:22px;cursor:pointer}
+.send:disabled{opacity:.5;cursor:wait}.note{text-align:center;color:#778198;font-size:10px;margin-top:9px;line-height:1.5}
+.tools{display:flex;gap:7px;align-items:center}.small-btn{background:#171b29;color:#aeb6c9;border:1px solid #30364b;border-radius:8px;padding:7px 9px;cursor:pointer;font-size:11px}
+.modebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.modebar label{font-size:11px;color:#aeb6c9}.modebar select{background:#171b29;color:white;border:1px solid #30364b;border-radius:8px;padding:7px;font-size:11px}
+.hidden{display:none!important}
+@media(max-width:700px){.side{display:none}header{padding:10px 12px}.content{padding:16px 10px}.welcome h1{font-size:35px}.cards{gap:7px}.card{padding:12px;font-size:12px}.card small{font-size:10px}.composer-wrap{width:calc(100% - 18px)}.msg{max-width:97%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand">✦ Nexora <span>AI</span></div>
+  <button class="new" id="newChat">＋ নতুন চ্যাট</button>
+  <div class="label">RECENT CHATS</div>
+  <div class="history" id="history"></div>
+  <div class="profile">● Guest User<br><br>Demo + Local AI<br>চ্যাট এই ব্রাউজারে সংরক্ষিত হয়</div>
+</aside>
+<main class="main">
+  <header>
+    <div class="modebar">
+      <select id="mode" aria-label="AI mode">
+        <option value="auto">Auto: Local / Demo</option>
+        <option value="local">Local AI only</option>
+        <option value="demo">Demo AI only</option>
+      </select>
+      <select id="model" aria-label="Local model">
+        <option value="qwen2.5:1.5b">Qwen 2.5 · 1.5B</option>
+        <option value="gemma3:1b">Gemma 3 · 1B</option>
+        <option value="llama3.2:1b">Llama 3.2 · 1B</option>
+      </select>
+    </div>
+    <span class="status" id="status">● Demo ready</span>
+  </header>
+  <section class="content">
+    <div class="welcome" id="welcome">
+      <div class="orb">✦</div><div class="eyebrow">YOUR AI, YOUR WORLD</div>
+      <h1>কী জানতে চাও?</h1>
+      <p>শিখো, প্রশ্ন করো, নতুন কিছু তৈরি করো — Nexora AI-এর সঙ্গে।</p>
+      <div class="cards">
+        <button class="card" onclick="suggest('পানির চক্র সহজ বাংলায় বুঝিয়ে দাও।')">✧ পড়াশোনা<small>কঠিন বিষয় সহজভাবে শেখো</small></button>
+        <button class="card" onclick="suggest('একটি সৃজনশীল ওয়েবসাইটের আইডিয়া দাও।')">⌁ আইডিয়া<small>নতুন কিছু ভাবতে সাহায্য</small></button>
+        <button class="card" onclick="suggest('একটি সুন্দর আনুষ্ঠানিক ইমেইল লিখতে সাহায্য করো।')">✎ লেখা<small>লেখা তৈরি ও উন্নত করো</small></button>
+        <button class="card" onclick="suggest('HTML কী? সহজ উদাহরণসহ বুঝিয়ে দাও।')">⌘ কোডিং<small>প্রোগ্রামিং শেখো</small></button>
+      </div>
+    </div>
+    <div class="messages hidden" id="messages" aria-live="polite"></div>
+  </section>
+  <div class="composer-wrap">
+    <form class="composer" id="form">
+      <textarea id="input" rows="2" maxlength="3000" placeholder="Nexora-কে কিছু জিজ্ঞেস করো..." aria-label="Message Nexora"></textarea>
+      <div class="bottom">
+        <span id="hint">✦ Demo চালু · Local AI ঐচ্ছিক</span>
+        <div class="tools">
+          <button class="small-btn" id="clear" type="button">History মুছুন</button>
+          <button class="send" id="send" type="submit" aria-label="Send">↑</button>
+        </div>
+      </div>
+    </form>
+    <div class="note">Demo উত্তর সীমিত ও আগে থেকে তৈরি। Local AI-এর জন্য নিজের PC-তে Ollama চালু করতে হবে। ব্যক্তিগত তথ্য বা পাসওয়ার্ড লিখবে না।</div>
+  </div>
+</main>
+</div>
 <script>
-let chats=[];let current=null;
-function notice(t){alert(t)}
-function newChat(){current=null;document.getElementById('messages').classList.add('hidden');document.getElementById('welcome').classList.remove('hidden');document.getElementById('input').value='';}
-function suggest(t){send(t)}
-function renderHistory(){let h=document.getElementById('history');h.innerHTML='';chats.forEach((c,i)=>{let b=document.createElement('button');b.textContent='◦ '+c.title;b.onclick=()=>showChat(i);h.appendChild(b)})}
-function showChat(i){current=i;let m=document.getElementById('messages');m.innerHTML='';chats[i].items.forEach(x=>add(x.role,x.text,false));m.classList.remove('hidden');document.getElementById('welcome').classList.add('hidden')}
-function add(role,text,save=true){let d=document.createElement('div');d.className='msg '+role;d.textContent=text;document.getElementById('messages').appendChild(d);if(save&&current!==null)chats[current].items.push({role,text});}
-function send(t){t=t.trim();if(!t)return;if(current===null){current=chats.length;chats.push({title:t.slice(0,30),items:[]});renderHistory()}document.getElementById('welcome').classList.add('hidden');document.getElementById('messages').classList.remove('hidden');add('user',t);add('bot','Nexora AI is currently in preview mode. This interface is ready, but a secure AI provider has not been connected yet. We will add live AI responses in the next development step.');document.getElementById('input').value='';}
-document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();send(document.getElementById('input').value)});
-</script></body></html>
+const OLLAMA_URL = "http://localhost:11434/api/chat";
+const KEY = "nexora_combined_chats_v1";
+let chats = readChats(), current = null;
+
+function readChats(){try{let x=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(x)?x.slice(0,30):[]}catch{return []}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(chats.slice(0,30)))}catch{}}
+function renderHistory(){
+ const root=document.getElementById("history");root.replaceChildren();
+ chats.forEach((c,i)=>{let b=document.createElement("button");b.textContent="◦ "+c.title;b.onclick=()=>showChat(i);root.appendChild(b)});
+}
+function addMessage(role,text,save=true,extra=""){
+ let d=document.createElement("div");d.className="msg "+role+(extra?" "+extra:"");d.textContent=text;
+ document.getElementById("messages").appendChild(d);
+ if(save&&current!==null){chats[current].items.push({role,text});persist()}
+}
+function showChat(i){
+ current=i;let root=document.getElementById("messages");root.replaceChildren();
+ chats[i].items.forEach(m=>addMessage(m.role,m.text,false));
+ root.classList.remove("hidden");document.getElementById("welcome").classList.add("hidden");
+}
+function newChat(){current=null;document.getElementById("messages").classList.add("hidden");document.getElementById("welcome").classList.remove("hidden");document.getElementById("input").value=""}
+function suggest(t){document.getElementById("input").value=t;send(t)}
+function setBusy(v){document.getElementById("send").disabled=v;document.getElementById("hint").textContent=v?"✦ উত্তর তৈরি হচ্ছে…":"✦ Demo চালু · Local AI ঐচ্ছিক"}
+function demoAnswer(q){
+ const s=q.toLowerCase();
+ if(/hello|hi\b|হ্যালো|হাই|আসসালামু|সালাম/.test(s)) return "হ্যালো! আমি Nexora AI Demo। 😊\nআমি এখন Demo Mode-এ আছি। Local AI যুক্ত করলে আরও বিস্তৃত প্রশ্নের উত্তর দিতে পারব।";
+ if(/তোমার নাম|তুমি কে|who are you|your name/.test(s)) return "আমি Nexora AI — একটি পরীক্ষামূলক AI সহকারী। Demo Mode-এ আমার উত্তর কিছু নির্দিষ্ট বিষয়ের মধ্যে সীমিত।";
+ if(/পানির চক্র|জলচক্র|water cycle/.test(s)) return "পানির চক্র হলো প্রকৃতিতে পানির ঘুরে ফিরে চলার প্রক্রিয়া।\n১. সূর্যের তাপে নদী, সাগর ও জলাশয়ের পানি বাষ্প হয়ে উপরে ওঠে।\n২. বাষ্প ঠান্ডা হয়ে মেঘ তৈরি করে।\n৩. মেঘ থেকে বৃষ্টি হয়।\n৪. বৃষ্টির পানি নদী-সাগরে ফিরে যায়।\nএভাবেই চক্রটি চলতে থাকে।";
+ if(/html কী|what is html|html কি/.test(s)) return "HTML-এর পূর্ণরূপ HyperText Markup Language। এটি ওয়েবপেজের কাঠামো তৈরি করতে ব্যবহৃত হয়। যেমন: heading, paragraph, image ও link যোগ করা যায়।";
+ if(/বাংলাদেশের রাজধানী|capital of bangladesh/.test(s)) return "বাংলাদেশের রাজধানী ঢাকা।";
+ if(/গণিত|যোগ|বিয়োগ|যোগ কর|calculate|সমাধান/.test(s) && /[0-9০-৯]/.test(s)) return "এটি Demo Mode, তাই সব ধরনের গণিত নির্ভুলভাবে সমাধান করতে পারি না। Local AI চালু করে আবার চেষ্টা করো।";
+ return "তোমার প্রশ্নটি পেয়েছি: “"+q+"”\n\nএটি Nexora AI-এর সীমিত Demo Mode। এই মোডে সব প্রশ্নের উত্তর জানা নেই। আরও বাস্তব AI উত্তর পেতে PC-তে Ollama চালু করে উপরের Mode থেকে Auto বা Local AI নির্বাচন করো।";
+}
+async function askLocal(userText){
+ const model=document.getElementById("model").value;
+ const history=chats[current].items.slice(-12).map(m=>({role:m.role==="bot"?"assistant":"user",content:m.text}));
+ const res=await fetch(OLLAMA_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+  model,stream:false,messages:[
+   {role:"system",content:"You are Nexora AI, a helpful and age-appropriate assistant. Reply in the user's language. Be clear and respectful. Do not ask for passwords, private contact details, or precise location. Avoid instructions for self-harm, violence, dangerous challenges, drugs, or illegal activity. If uncertain, say so."},
+   ...history
+  ],options:{num_predict:700}
+ })});
+ if(!res.ok) throw new Error("Ollama error "+res.status);
+ const data=await res.json();if(!data.message?.content)throw new Error("মডেল থেকে উত্তর পাওয়া যায়নি।");
+ return data.message.content.trim();
+}
+async function send(text){
+ text=String(text||"").trim();if(!text)return;
+ if(current===null){chats.unshift({title:text.slice(0,32),items:[]});current=0;renderHistory()}
+ document.getElementById("welcome").classList.add("hidden");
+ const root=document.getElementById("messages");root.classList.remove("hidden");
+ addMessage("user",text);document.getElementById("input").value="";
+ const typing=document.createElement("div");typing.className="msg bot";typing.textContent="Nexora ভাবছে…";root.appendChild(typing);
+ setBusy(true);
+ const mode=document.getElementById("mode").value;
+ try{
+  let answer,used="Demo";
+  if(mode!=="demo"){
+   try{answer=await askLocal(text);used="Local AI"}
+   catch(err){if(mode==="local")throw new Error("Local AI সংযোগ হয়নি। Ollama চালু আছে কি না দেখো। ("+err.message+")");answer=demoAnswer(text);used="Demo fallback"}
+  }else answer=demoAnswer(text);
+  typing.remove();addMessage("bot",answer+"\n\n— "+used);
+  document.getElementById("status").textContent=used==="Local AI"?"● Local AI":"● Demo ready";
+ }catch(err){typing.remove();addMessage("bot",err.message,false,"error");document.getElementById("status").textContent="● Local AI offline"}
+ finally{setBusy(false);root.scrollTop=root.scrollHeight}
+}
+document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();send(document.getElementById("input").value)});
+document.getElementById("newChat").addEventListener("click",newChat);
+document.getElementById("clear").addEventListener("click",()=>{if(confirm("এই ব্রাউজারের সব Chat History মুছবে?")){chats=[];current=null;persist();renderHistory();newChat()}});
+renderHistory();
+</script>
+</body>
+</html>
